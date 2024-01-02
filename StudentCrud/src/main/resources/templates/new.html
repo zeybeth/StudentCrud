@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Student</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgb(229, 229, 229);
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .container-wrap {
+            width: 100%;
+            max-width: 600px; /* Genişlik artırıldı */
+            margin-top: 20px;
+            border-radius: 20px; /* Kenarları oval yap */
+            overflow: hidden; /* İçeriği kes */
+            background-color: #fff; /* Formu saran divin arka plan rengi */
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+        }
+
+        form {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .btn-info {
+            transition: background-color 0.3s ease; /* Animasyon süresi ve geçiş tipi */
+        }
+
+        .btn-info:hover {
+            background-color: #17a2b8; /* Renk değişikliği */
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-wrap">
+        <h1>Create New Student</h1>
+        <div class="container">
+            <form onsubmit="return validateForm()" th:action="@{/save}" th:object="${student}" method="post">
+				<!--th:action attribute'u, formun gönderildiğinde yönlendirilecek URL'yi belirtir.-->
+				<!-- th:object attribute'u, formun bağlı olduğu nesneyi (örneğin, bir öğrenci nesnesi) belirtir.  -->
+                <div class="form-group">
+                    <label for="studentName">Student Name</label>
+                    <input type="hidden" th:field="*{id}" />
+                    <input type="text" id="studentName" th:field="*{studentname}" class="form-control" placeholder="Student Name" required/>
+                </div>
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <input type="text" id="course" th:field="*{course}" class="form-control" placeholder="Course" required/>
+                </div>
+                <div class="form-group">
+                    <label for="fee">Fee</label>
+                    <input type="text" id="fee" th:field="*{fee}" class="form-control" placeholder="Fee" required/>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+    <script>
+         function validateForm() {
+	        var studentName = document.getElementById('studentName').value.trim();
+	        var course = document.getElementById('course').value.trim();
+	        var fee = document.getElementById('fee').value.trim();
+	
+	        if (studentName === '' || course === '' || fee === '') {
+	            alert('Lütfen boş bırakmayınız.');
+	            return false;
+	        }
+	        return true;
+	    }
+    </script>
+</html>

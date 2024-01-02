@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Crud System - Student Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0; /* Arka plan rengi */
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        #container {
+            width: 75%;
+            margin-bottom: 150px;
+            background-color: #fff;
+            border-radius: 20px; /* Kenarları oval yapma */
+            padding: 20px;
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1); /* Hafif bir gölge */
+            transition: transform 0.3s ease-in-out; /* Başlık animasyonu */
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: bold;
+            animation: pulse 1s infinite alternate; /* Başlık için animasyon */
+            color:black;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th, td {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: mediumpurple;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: powderblue;
+        }
+
+        .btn-warning:hover {
+            background-color: pink !important;
+            transform: scale(1.1);
+        }
+
+        .btn-danger:hover {
+            background-color: lightblue !important;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2>Spring Boot Crud System - Student Registration</h2>
+        <div align="left">
+            <h3><a class="btn btn-primary" th:href="@{'/new'}">Add New</a></h3>
+        </div>
+        <div class="col-sm-12" align="center">
+            <div class="panel-body table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Course</th>
+                            <th>Fee</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>     <!--thead ve tbody etiketleri, öğrenci tablosunun başlık ve gövde kısımlarını temsil eder.-->
+                    </thead>
+                    <tbody>
+                        <tr th:each="student : ${liststudent}">
+                            <td th:text="${student.id}">Student ID</td>
+                            <td th:text="${student.studentname}">Student Name</td>
+                            <td th:text="${student.course}">Course</td>
+                            <td th:text="${student.fee}">Fee</td>
+                            <td>
+                                <a class="btn btn-warning" style="background-color: #7d8fa4;" th:href="@{'/edit/' + ${student.id}}">Edit</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" style="background-color: #c18d99;" th:href="@{'/delete/' + ${student.id}}">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
